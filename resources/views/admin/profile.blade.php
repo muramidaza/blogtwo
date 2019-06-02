@@ -3,6 +3,7 @@
 {{ $user->name }}
 @endsection
 @section('content')
+
 <div>
 	<ul class="list-group">
 		<li class="list-group-item">
@@ -78,4 +79,5 @@
 		@endif
 	</div>
 </div>
+
 @endsection

@@ -6,6 +6,7 @@
 @if ( !$posts->count() )
 Ещё нет постов. Ввойдите и напишите новый пост!
 @else
+	
 <div class="">
   @foreach( $posts as $post )
   <div class="list-group">
@@ -30,5 +31,6 @@
   @endforeach
   {!! $posts->render() !!}
 </div>
+
 @endif
 @endsection

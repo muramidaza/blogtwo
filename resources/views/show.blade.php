@@ -11,8 +11,10 @@
 @endsection
 @section('title-meta')
 <p>{{ $post->created_at->format('M d,Y \a\t h:i a') }} Автор: <a href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a></p>
+
 @endsection
 @section('content')
+
 @if($post)
   <div>
     {!! $post->body !!}
@@ -54,6 +56,7 @@
     </ul>
     @endif
   </div>
+  
 @else
 404 ошибка
 @endif
