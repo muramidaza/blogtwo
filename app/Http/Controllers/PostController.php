@@ -25,7 +25,7 @@ class PostController extends Controller
 		// если пользователь может публиковать автор или администратор
 		if($request->user()->can_post())
 		{
-			return view('posts.create');
+			return view('create');
 		}		
 		else 
 		{
@@ -33,7 +33,7 @@ class PostController extends Controller
 		}
 	}
 	
-	public function store(PostFormRequest $request)
+	public function store(Request $request)
 	{
 		$post = new Posts();
 		$post->title = $request->get('title');
@@ -62,14 +62,14 @@ class PostController extends Controller
 			 return redirect('/')->withErrors('запрошенная страница не найдена');
 		}
 		$comments = $post->comments;
-		return view('posts.show')->withPost($post)->withComments($comments);
+		return view('show')->withPost($post)->withComments($comments);
 	}
 	
 	public function edit(Request $request,$slug)
 	{
 		$post = Posts::where('slug',$slug)->first();
 		if($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
-			return view('posts.edit')->with('post',$post);
+			return view('edit')->with('post',$post);
 		return redirect('/')->withErrors('у вас нет достаточных прав');
 	}
 	

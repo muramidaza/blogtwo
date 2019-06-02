@@ -11,15 +11,25 @@
 |
 */
 
-Auth::routes();
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::post('register', 'Auth\RegisterController@register');
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+//Auth::routes();
 
 Route::get('/','PostController@index');
-Route::get('/home',['as' => 'home', 'uses' => 'PostController@index']);
+Route::get('/home','PostController@index');
+//Route::get('/home',['as' => 'home', 'uses' => 'PostController@index']);
 //authentication
-//Route::controllers([
-// 'auth' => 'Auth\AuthController',
-// 'password' => 'Auth\PasswordController',
-//]);
+
 // проверка залогиненного пользователя
 Route::group(['middleware' => ['auth']], function()
 {
@@ -48,3 +58,12 @@ Route::get('user/{id}','UserController@profile')->where('id', '[0-9]+');
 Route::get('user/{id}/posts','UserController@user_posts')->where('id', '[0-9]+');
 // вывод одного поста
 Route::get('/{slug}',['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
+
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+	Artisan::call('route:clear');
+	Artisan::call('backup:clean');
+    return "Кэш очищен.";
+});
