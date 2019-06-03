@@ -1,8 +1,9 @@
 <?php namespace App\Http\Requests;
-use App\Http\Requests\Request;
 use App\User;
 use Auth;
-class PostFormRequest extends Request {
+use Illuminate\Foundation\Http\FormRequest;
+
+class PostFormRequest extends FormRequest {
   /**
    * Определить авторизирован ли пользователь делать этот запрос.
    *
@@ -25,7 +26,7 @@ class PostFormRequest extends Request {
   {
     return [
       'title' => 'required|unique:posts|max:255',
-      'title' => array('Regex:/^[A-Za-z0-9 ]+$/'),
+      'title' => array('Regex:/^[A-Za-z0-9 А-Яа-яЁё]+$/'),
       'body' => 'required',
     ];
   }    

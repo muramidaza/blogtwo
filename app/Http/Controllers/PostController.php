@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 use App\Posts;
 use App\User;
 use Redirect;
@@ -33,7 +31,7 @@ class PostController extends Controller
 		}
 	}
 	
-	public function store(Request $request)
+	public function store(PostFormRequest $request)
 	{
 		$post = new Posts();
 		$post->title = $request->get('title');
