@@ -1,12 +1,10 @@
-<?php namespace App\Http\Controllers;
-use App\Posts;
-use App\User;
-use Redirect;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PostFormRequest;
+<?php
+
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class ContragentController extends Controller
 {
 	public function index()
 	{
@@ -21,7 +19,7 @@ class PostController extends Controller
 	public function create(Request $request)
 	{
 		// если пользователь может публиковать автор или администратор
-		if($request->user()->is_admin())
+		if($request->user()->can_post())
 		{
 			return view('create');
 		}		
