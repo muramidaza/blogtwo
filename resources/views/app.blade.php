@@ -12,7 +12,7 @@
 
 	</head>
 	<body>
-
+		
 		<nav class="navbar navbar-default navbar-static">
 			<div class="container-fluid">
 				<!-- Заголовок -->
@@ -121,7 +121,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
-					<p>Copyright © 2015 | <a href="http://devuserlab.com">Dev User Lab</a></p>
+					<p>Copyright © 2015 | <a href="http://muramidaza.ru">by Muramidaza</a></p>
 				</div>
 			</div>
 		</div>
