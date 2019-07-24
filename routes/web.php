@@ -49,7 +49,12 @@
 		// удаление комментария
 		Route::post('comment/delete/{id}','CommentController@distroy');
 		
-		Route::get('/contragents','ContragentController@index');
+		Route::get('/contragents', 'ContragentController@index');
+		Route::get('/new-contragent', 'ContragentController@create');
+		Route::post('/new-contragent', 'ContragentController@store');
+		Route::get('/edit-contragent/{id}', 'ContragentController@edit');
+		Route::post('/update-contragent', 'ContragentController@update');
+		Route::get('/delete-contragent', 'ContragentController@destroy');
 		
 	});
 		

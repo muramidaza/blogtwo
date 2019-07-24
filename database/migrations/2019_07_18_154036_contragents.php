@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContragentsTable extends Migration
+class Contragents extends Migration
 {
     /**
      * Run the migrations.
@@ -16,12 +16,12 @@ class CreateContragentsTable extends Migration
         Schema::create('contragents', function (Blueprint $table) {
             $table->bigIncrements('id');
 			$table->string('name');
-			$table->string('numberdogovor');	
+			$table->string('numberdogovor')->nullable();	
             $table->string('address');
 			$table->string('contactface1');
-			$table->string('contactface2');	
+			$table->string('contactface2')->nullable();	
 			$table->string('contact1');
-			$table->string('contact2');	
+			$table->string('contact2')->nullable();	
             $table->timestamps();
         });
     }
