@@ -54,7 +54,7 @@
 		Route::post('/new-contragent', 'ContragentController@store');
 		Route::get('/edit-contragent/{id}', 'ContragentController@edit');
 		Route::post('/update-contragent', 'ContragentController@update');
-		Route::get('/delete-contragent', 'ContragentController@destroy');
+		Route::get('/delete-contragent/{id}', 'ContragentController@destroy');
 		
 	});
 		

@@ -7,7 +7,7 @@ use App\Contragent;
 use App\User;
 use Redirect;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\ContragentFormRequest;
 use Illuminate\Http\Request;
 
 class ContragentController extends Controller
@@ -35,7 +35,7 @@ class ContragentController extends Controller
 		}
 	}
 
-	public function store(Request $request)
+	public function store(ContragentFormRequest $request)
 	{
 		$contragent = new Contragent();
 		$contragent->name = $request->get('name');
@@ -61,7 +61,7 @@ class ContragentController extends Controller
 		return redirect('/')->withErrors('у вас нет достаточных прав');
 	}
 	
-	public function update(Request $request)
+	public function update(ContragentFormRequest $request)
 	{
 		$contragent_id = $request->input('contragent_id');
 		$contragent = Contragent::find($contragent_id);
