@@ -48,13 +48,18 @@
 		Route::post('comment/add','CommentController@store');
 		// удаление комментария
 		Route::post('comment/delete/{id}','CommentController@distroy');
+
+		Route::group(['prefix' => 'contragent'], function () {
+			Route::get('/list', 'ContragentController@index');
+			Route::get('/new', 'ContragentController@create');
+			Route::post('/new', 'ContragentController@store');
+			Route::get('/edit/{id}', 'ContragentController@edit');
+			Route::post('/update', 'ContragentController@update');
+			Route::get('/delete/{id}', 'ContragentController@destroy');
+			Route::get('/show/{id}', 'ContragentController@show');	
+		});
 		
-		Route::get('/contragents', 'ContragentController@index');
-		Route::get('/new-contragent', 'ContragentController@create');
-		Route::post('/new-contragent', 'ContragentController@store');
-		Route::get('/edit-contragent/{id}', 'ContragentController@edit');
-		Route::post('/update-contragent', 'ContragentController@update');
-		Route::get('/delete-contragent/{id}', 'ContragentController@destroy');
+
 		
 		Route::get('/equipments', 'EquipmentController@index');
 		Route::get('/new-equipment', 'EquipmentController@create');

@@ -42,5 +42,6 @@ class ContragentFormRequest extends FormRequest {
 			'contactface1.required'	=> 'Необходимо ФИО контактного лица',
 			'contact1.required'	=> 'Необходимо указать контактный телефон',
 		];
-	}	
+	}
+
 }

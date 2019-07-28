@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-<form method="post" action='{{ url("/update-contragent") }}'>
+<form method="post" action='{{ url("/contragent/update") }}'>
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<input type="hidden" name="contragent_id" value="{{ $contragent->id }}">
 	<div class="form-group">

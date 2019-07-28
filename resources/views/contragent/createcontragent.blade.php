@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-<form action="/new-contragent" method="post">
+<form action="/contragent/new" method="post">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	<div class="form-group">
 		<input required="required" value="{{ old('name') }}" placeholder="Введите название" type="text" name = "name" class="form-control">

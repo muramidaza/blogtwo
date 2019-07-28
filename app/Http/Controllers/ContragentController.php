@@ -50,7 +50,7 @@ class ContragentController extends Controller
 		
 		$contragent->save();
 		
-		return redirect('edit-contragent/'.$contragent->id)->withMessage($message);
+		return redirect('contragent/edit/'.$contragent->id)->withMessage($message);
 	}
 	
 	public function edit(Request $request, $id)
@@ -104,5 +104,13 @@ class ContragentController extends Controller
 		$message = 'Контрагент успешно удален';
 		
 		return redirect('contragent.contragents')->withMessage($message);
-	}	
+	}
+
+	public function show($id)
+	{
+		$contragent = Contragent::where('id',$id)->first();
+
+		//$comments = $post->comments;
+		return view('contragent.showcontragent')->withContragent($contragent);
+	}		
 }
