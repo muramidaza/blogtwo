@@ -68,6 +68,9 @@
 								<li>
 									<a href="{{ url('/user/'.Auth::id().'/posts') }}">Мои посты</a>
 								</li>
+								<li>
+									<a href="{{ url('/contragents') }}">Контрагенты</a>
+								</li>
 								@endif
 								
 								<li>

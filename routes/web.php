@@ -56,6 +56,13 @@
 		Route::post('/update-contragent', 'ContragentController@update');
 		Route::get('/delete-contragent/{id}', 'ContragentController@destroy');
 		
+		Route::get('/equipments', 'EquipmentController@index');
+		Route::get('/new-equipment', 'EquipmentController@create');
+		Route::post('/new-equipment', 'EquipmentController@store');
+		Route::get('/edit-equipment/{id}', 'EquipmentController@edit');
+		Route::post('/update-equipment', 'EquipmentController@update');
+		Route::get('/delete-equipment/{id}', 'EquipmentController@destroy');		
+		
 	});
 		
 	Route::group(['middleware' => ['isadmin']], function()

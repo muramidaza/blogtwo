@@ -19,7 +19,7 @@ class ContragentController extends Controller
 		// заголовок страницы
 		$title = 'Контрагенты';
 		// вывод шаблона home.blade.php из папки resources/views
-		return view('contragents')->withContragents($contragents)->withTitle($title);
+		return view('contragent.contragents')->withContragents($contragents)->withTitle($title);
 	}
 
 	public function create(Request $request)
@@ -27,7 +27,7 @@ class ContragentController extends Controller
 		// если пользователь может публиковать автор или администратор
 		if($request->user()->can_post())
 		{
-			return view('createcontragent');
+			return view('contragent.createcontragent');
 		}		
 		else 
 		{
@@ -57,7 +57,7 @@ class ContragentController extends Controller
 	{
 		$contragent = Contragent::where('id', $id)->first();
 		if($request->user()->can_post())
-			return view('editcontragent')->with('contragent', $contragent);
+			return view('contragent.editcontragent')->with('contragent', $contragent);
 		return redirect('/')->withErrors('у вас нет достаточных прав');
 	}
 	
@@ -79,7 +79,7 @@ class ContragentController extends Controller
 			
 			$contragent->save();
 			
-			return redirect('contragents')->withMessage($message);
+			return redirect('contragent.contragents')->withMessage($message);
 		}
 		else
 		{
@@ -103,6 +103,6 @@ class ContragentController extends Controller
 		
 		$message = 'Контрагент успешно удален';
 		
-		return redirect('/contragents')->withMessage($message);
+		return redirect('contragent.contragents')->withMessage($message);
 	}	
 }
