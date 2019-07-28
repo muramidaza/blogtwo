@@ -12,13 +12,8 @@
 
 @section('content')
 
-@if($contragent)
 	<div>
 		{!! $contragent->numberdogovor !!}
 	</div>		
 
-	
-@else
-404 ошибка
-@endif
 @endsection
