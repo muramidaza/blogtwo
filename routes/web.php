@@ -59,15 +59,23 @@
 			Route::get('/show/{id}', 'ContragentController@show');	
 		});
 		
-
+		Route::group(['prefix' => 'equipment'], function () {
+			Route::get('/list', 'EquipmentController@index');
+			Route::get('/new', 'EquipmentController@create');
+			Route::post('/new', 'EquipmentController@store');
+			Route::get('/edit/{id}', 'EquipmentController@edit');
+			Route::post('/update', 'EquipmentController@update');
+			Route::get('/delete/{id}', 'EquipmentController@destroy');
+			Route::get('/show/{id}', 'EquipmentController@show');	
+		});
 		
-		Route::get('/equipments', 'EquipmentController@index');
-		Route::get('/new-equipment', 'EquipmentController@create');
-		Route::post('/new-equipment', 'EquipmentController@store');
-		Route::get('/edit-equipment/{id}', 'EquipmentController@edit');
-		Route::post('/update-equipment', 'EquipmentController@update');
-		Route::get('/delete-equipment/{id}', 'EquipmentController@destroy');		
-		
+		Route::group(['prefix' => 'files'], function () {
+			Route::get('/list', 'FilesController@index');
+			Route::get('/load', 'FilesController@load');
+			Route::post('/save', 'FilesController@save');
+			Route::get('/delete/{id}', 'FilesController@destroy');
+			Route::get('/show/{id}', 'FilesController@show');	
+		});		
 	});
 		
 	Route::group(['middleware' => ['isadmin']], function()
@@ -90,6 +98,18 @@
 	Route::get('user/{id}','UserController@profile')->where('id', '[0-9]+');
 	// вывод списка постов
 	Route::get('user/{id}/posts','UserController@user_posts')->where('id', '[0-9]+');
-	// вывод одного поста
-	Route::get('/{slug}',['as' => 'post', 'uses' => 'PostController@show'])->where('slug', '[A-Za-z0-9-_]+');
-	
+
+/* 	Route::get('storage/{folder}/{filename}', function ($folder, $filename)
+	{
+		//$path = Storage::get(base_path().'\\storage\\'.$folder.'\\'.$filename);
+		$path = Storage::get('C:/OpenServer/domains/blogtwo/storage/others/1565022021_IMG_2149.JPG');
+		
+
+		$file = File::get($path);
+		$type = File::mimeType($path);
+
+		$response = Response::make($file, 200);
+		$response->header("Content-Type", $type);
+
+		return $folder.'/'.$filename;
+	}); */	

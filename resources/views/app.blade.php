@@ -71,6 +71,12 @@
 								<li>
 									<a href="{{ url('/contragent/list') }}">Контрагенты</a>
 								</li>
+								<li>
+									<a href="{{ url('/equipment/list') }}">Оборудование</a>
+								</li>
+								<li>
+									<a href="{{ url('/files/list') }}">Файлы</a>
+								</li>
 								@endif
 								
 								<li>

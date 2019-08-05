@@ -15,12 +15,16 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->string('name');
+			$table->string('type');
 			$table->string('model');
-			$table->string('contragent_id');	
-            $table->string('serialnumber')->nullable();
-			$table->text('note');
-
+			$table->string('serialnumber')->nullable();
+			$table->string('invnumber')->nullable();
+			$table->string('contragent_id');
+			$table->string('photo1')->nullable();
+			$table->string('photo2')->nullable();
+			$table->string('photo3')->nullable();
+			$table->string('photo4')->nullable();
+			$table->text('note')->nullable();
             $table->timestamps();
         });
     }

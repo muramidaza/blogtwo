@@ -18,7 +18,7 @@ class EquipmentController extends Controller
 		// сделать выборку 5 постов из базы данных, активных и последних
 		$equipments = Equipment::orderBy('created_at','desc')->paginate(5);
 		// заголовок страницы
-		$title = 'Контрагенты';
+		$title = 'Оборудование';
 		// вывод шаблона home.blade.php из папки resources/views
 		return view('equipment.equipments')->withEquipments($equipments)->withTitle($title);
 	}
@@ -39,13 +39,16 @@ class EquipmentController extends Controller
 	public function store(EquipmentFormRequest $request)
 	{
 		$equipment = new Equipment();
-		$equipment->name = $request->get('name');
-		$equipment->numberdogovor = $request->get('numberdogovor');
-		$equipment->address = $request->get('address');
-		$equipment->contactface1 = $request->get('contactface1');
-		$equipment->contact1 = $request->get('contact1');
-		$equipment->contactface2 = $request->get('contactface2');
-		$equipment->contact2 = $request->get('contact2');
+		$equipment->type = $request->get('type');
+		$equipment->model = $request->get('model');
+		$equipment->serialnumber = $request->get('serialnumber');
+		$equipment->invnumber = $request->get('invnumber');
+		
+		foreach ($request->file() as $file) {
+                foreach ($file as $f) {
+                    $f->move(storage_path('images'), time().'_'.$f->getClientOriginalName());
+                }
+            }
 		
 		$message = 'Контрагент успешно создан';
 		
