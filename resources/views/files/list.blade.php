@@ -18,7 +18,7 @@
 		<div class="list-group-item">
 			<p>Папка {{ $file->type }}</p>
 			<article>
-				<img src="{{ asset($file->type.'/'.$file->fullname) }}" style="width: 100px; height: 100px; border: 4px double gray">	
+				<img src="{{ asset($file->type.'/'.$file->fullname) }}" style="height: 100px; border: 4px double gray">	
 			</article>
 		</div>
 	</div>

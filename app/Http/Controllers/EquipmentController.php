@@ -105,7 +105,7 @@ class EquipmentController extends Controller
 			$data['errors'] = 'У вас нет достаточных прав';
 		}
 		
-		$message = 'Контрагент успешно удален';
+		$message = 'Запись успешно удалена';
 		
 		return redirect('equipment.equipments')->withMessage($message);
 	}	

@@ -7,6 +7,8 @@ use App\User;
 use App\Files;
 use Redirect;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class FilesController extends Controller
 {
@@ -39,6 +41,10 @@ class FilesController extends Controller
 					$fullname = time().'_'.$f->getClientOriginalName();
                     $f->move('others', $fullname);
 					
+					$img = Image::make('others/'.$fullname);
+					$img->resize(40, null, function ($constraint) {$constraint->aspectRatio();});
+					$img->save('thumbnails/'.$fullname);
+					
 					$files = new Files();
 					$files->type = 'others';
 					$files->fullname = $fullname;
@@ -51,5 +57,29 @@ class FilesController extends Controller
 		return redirect('files/list')->withMessage($message);
 	}	
 	
+	public function destroy(Request $request, $id)
+	{
+		//
+		$file = Files::find($id);
+		
+
+		
+		if($request->user()->can_post())
+		{
+			File::delete($file->type.'/'.$file->fullname);
+			File::delete('thumbnails/'.$file->fullname);			
+			$file->delete();
+			$data['message'] = 'Запись успешно удалена';
+		}
+		else 
+		{
+			$data['errors'] = 'У вас нет достаточных прав';
+		}
+		
+		$message = 'Запись успешно удалена';
+		
+		return redirect('files/list')->withMessage($message);
+	}
+
 	
 }
