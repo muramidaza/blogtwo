@@ -5,6 +5,7 @@ use Redirect;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
 use Illuminate\Http\Request;
+use App\Contragent;
 
 class PostController extends Controller
 {
@@ -23,7 +24,9 @@ class PostController extends Controller
 		// если пользователь может публиковать автор или администратор
 		if($request->user()->can_post())
 		{
-			return view('create');
+			$contragents = Contragent::all();
+			
+			return view('create')->withContragents($contragents);
 		}		
 		else 
 		{
@@ -35,6 +38,7 @@ class PostController extends Controller
 	{
 		$post = new Posts();
 		$post->title = $request->get('title');
+		$post->contragent = $request->get('contragent');
 		$post->body = $request->get('body');
 		$post->slug = str_slug($post->title);
 		$post->author_id = $request->user()->id;
@@ -54,7 +58,7 @@ class PostController extends Controller
 	
 	public function show($slug)
 	{
-		$post = Posts::where('slug',$slug)->first();
+		$post = Posts::where('slug', $slug)->first();
 		if(!$post)
 		{
 			 return redirect('/')->withErrors('запрошенная страница не найдена');
@@ -63,11 +67,14 @@ class PostController extends Controller
 		return view('show')->withPost($post)->withComments($comments);
 	}
 	
-	public function edit(Request $request,$slug)
+	public function edit(Request $request, $slug)
 	{
+		$contragents = Contragent::all();
+		
 		$post = Posts::where('slug',$slug)->first();
 		if($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
-			return view('edit')->with('post',$post);
+			return view('edit')->with('post', $post)->with('contragents', $contragents);
+		
 		return redirect('/')->withErrors('у вас нет достаточных прав');
 	}
 	
@@ -94,6 +101,7 @@ class PostController extends Controller
 			}
 			$post->title = $title;
 			$post->body = $request->input('body');
+			$post->contragent = $request->get('contragent');
 			if($request->has('save'))
 			{
 				$post->active = 0;

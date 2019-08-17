@@ -20,7 +20,16 @@
     <input required="required" placeholder="Enter title here" type="text" name = "title" class="form-control" value="@if(!old('title')){{$post->title}}@endif{{ old('title') }}"/>
   </div>
   <div class="form-group">
-    <textarea name='body'class="form-control">
+    
+		<p>
+			<select name="contragent" class="form-control">
+				@foreach ($contragents as $contragent)
+					<option value="{{$contragent->id}}" @if($contragent->id == $post->contragent) selected @endif>{{ $contragent->name }}</option>
+				@endforeach
+			</select>
+		</p>	
+	
+	<textarea name='body'class="form-control">
       @if(!old('body'))
       {!! $post->body !!}
       @endif
