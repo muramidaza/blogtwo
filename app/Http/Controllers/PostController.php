@@ -80,10 +80,12 @@ class PostController extends Controller
 	public function edit(Request $request, $slug)
 	{
 		$contragents = Contragent::all();
+		$files = Files::all();
 		
 		$post = Posts::where('slug',$slug)->first();
+		
 		if($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
-			return view('edit')->with('post', $post)->with('contragents', $contragents);
+			return view('edit')->with('post', $post)->with('contragents', $contragents)->with('files', $files);
 		
 		return redirect('/')->withErrors('у вас нет достаточных прав');
 	}
@@ -124,7 +126,10 @@ class PostController extends Controller
 				$landing = $post->slug;
 			}
 			$post->save();
-					 return redirect($landing)->withMessage($message);
+			
+			$post->files()->attach($request->get('files'));
+			
+			return redirect($landing)->withMessage($message);
 		}
 		else
 		{
