@@ -25,6 +25,12 @@
 					<option value="{{$contragent->id}}">{{ $contragent->name }}</option>
 				@endforeach
 			</select>
+			
+			<select name="files[]" class="form-control" size="8" multiple>
+				@foreach ($files as $file)
+					<option value="{{$file->id}}" >{{ $file->fullname }}</option>
+				@endforeach
+			</select>			
 		</p>
 		<textarea name='body'class="form-control">{{ old('body') }}</textarea>
 	</div>

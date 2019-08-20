@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 use App\Posts;
 use App\User;
+use App\Files;
 use Redirect;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
@@ -25,8 +26,9 @@ class PostController extends Controller
 		if($request->user()->can_post())
 		{
 			$contragents = Contragent::all();
+			$files = Files::all();
 			
-			return view('create')->withContragents($contragents);
+			return view('create')->withContragents($contragents)->withFiles($files);
 		}		
 		else 
 		{
@@ -36,9 +38,14 @@ class PostController extends Controller
 	
 	public function store(PostFormRequest $request)
 	{
+		//dd($request->get('files'));
+		
 		$post = new Posts();
 		$post->title = $request->get('title');
 		$post->contragent = $request->get('contragent');
+		
+		
+		
 		$post->body = $request->get('body');
 		$post->slug = str_slug($post->title);
 		$post->author_id = $request->user()->id;
@@ -53,6 +60,9 @@ class PostController extends Controller
 			$message = 'Пост опубликован успешно';
 		}
 		$post->save();
+		
+		$post->files()->attach($request->get('files'));
+		
 		return redirect('edit/'.$post->slug)->withMessage($message);
 	}
 	
