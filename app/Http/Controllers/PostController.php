@@ -95,6 +95,13 @@ class PostController extends Controller
 		//
 		$post_id = $request->input('post_id');
 		$post = Posts::find($post_id);
+		
+		$arrfiles = [];
+		
+		foreach($post->files->toArray() as $elem) {
+			$arrfiles[] = $elem['id'];
+		}
+		
 		if($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
 		{
 			$title = $request->input('title');
@@ -127,6 +134,7 @@ class PostController extends Controller
 			}
 			$post->save();
 			
+			$post->files()->detach($arrfiles);
 			$post->files()->attach($request->get('files'));
 			
 			return redirect($landing)->withMessage($message);
