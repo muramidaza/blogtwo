@@ -134,8 +134,8 @@ class PostController extends Controller
 			}
 			$post->save();
 			
-			$post->files()->detach($arrfiles);
-			$post->files()->attach($request->get('files'));
+			//$post->files()->detach($arrfiles);
+			$post->files()->sync($request->get('files'));
 			
 			return redirect($landing)->withMessage($message);
 		}
