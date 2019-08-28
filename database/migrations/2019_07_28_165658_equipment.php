@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEquipmentTable extends Migration
+class Equipment extends Migration
 {
     /**
      * Run the migrations.
@@ -19,12 +19,9 @@ class CreateEquipmentTable extends Migration
 			$table->string('model');
 			$table->string('serialnumber')->nullable();
 			$table->string('invnumber')->nullable();
-			$table->string('contragent_id');
-			$table->string('photo1')->nullable();
-			$table->string('photo2')->nullable();
-			$table->string('photo3')->nullable();
-			$table->string('photo4')->nullable();
+			$table->integer('contragent_id')->unsigned()->index();
 			$table->text('note')->nullable();
+			$table->softDeletes();
             $table->timestamps();
         });
     }
